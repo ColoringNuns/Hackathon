@@ -1,13 +1,13 @@
 function preload() {
   background1 = loadImage('assets/test.png');
   character = new Entity(25,0,[],['rectangle',0,0,50,50],updtChar,100);
+  obstTest = new Obstacle(200,200,['rectangle',0,0,200,50]);
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
-  backgroundWidth = windowWidth; 
-  //TODO: FIX THE INFINITE JUMP
+  backgroundWidth = windowWidth;
 }
 
 function updtChar() {
@@ -26,15 +26,16 @@ function updtChar() {
     character.xspd = 0;
     character.sprite.position.y = ground;
   }
-  //Ceiling Collision
-  var ceiling = character.sprite.height / 2;
+  //Ceiling Collision NOT NECESSARY. REMOVED FOR BETTER BEHAVIOUR.
+  /*var ceiling = character.sprite.height / 2;
   if (character.sprite.position.y <= ceiling) {
     character.sprite.position.y = ceiling;
-  }
+  }*/
 
   //Left Edge Collision
   var leftEdge = character.sprite.width / 2;
   if (character.sprite.position.x <= leftEdge) {
+    character.xpd = 0;
     character.sprite.position.x = leftEdge;
   }
 }
@@ -64,22 +65,22 @@ function draw() {
   scroll();
   character.update();
   character.draw();
+  obstTest.draw();
 }
 
 function scroll() {
-  camera.position.x = character.sprite.position.x;
+  if (character.sprite.position.x >= width / 4) { //BEGIN SCROLL ONCE REACHES QUARTER OF WIDTH.
+    camera.position.x = character.sprite.position.x + width / 4;
+  }
   image(background1, backgroundWidth, 0);
   image(background1, backgroundWidth-windowWidth, 0);
   image(background1, backgroundWidth-(2*windowWidth), 0);
-  
+
   if (backgroundWidth - character.sprite.position.x <= windowWidth/2) {
-    console.log("hit edge");
-    console.log(character.sprite.position.x + " " +  windowWidth + " " + backgroundWidth);
     backgroundWidth += windowWidth;
   }
 
   if (backgroundWidth - windowWidth > character.sprite.position.x) {
-    console.log("test");
     backgroundWidth -= windowWidth;
   }
 }

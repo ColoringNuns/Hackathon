@@ -1,0 +1,3 @@
+class obstGroup {
+  //WILL BE AN OBJECT THAT HANDLES ALL OF THE GROUND
+}

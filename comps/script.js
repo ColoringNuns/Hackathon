@@ -1,13 +1,16 @@
 function preload() {
-  background1 = loadImage('assets/test.png');
+  background1 = loadImage('assets/pixelartcity.png');
   character = new Entity(25,0,[],['rectangle',0,0,50,50],updtChar,100);
   obstTest = new Obstacle(200,200,['rectangle',0,0,200,50]);
+  monsterTest = new BasicMonster(25,0,character);
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
   backgroundWidth = windowWidth;
+  firstNote = new TextBox(windowWidth/4,windowHeight/10, windowWidth/2, windowHeight/5, "The world is crumbling. Order has fallen. We are on our own.");
+  noteTest = new Note(300,400,[],['rectangle',0,0,50,50],character,firstNote);
 }
 
 function updtChar() {
@@ -25,6 +28,7 @@ function updtChar() {
     character.yspd = 0;
     character.xspd = 0;
     character.sprite.position.y = ground;
+    character.jumpCount = 0;
   }
   //Ceiling Collision NOT NECESSARY. REMOVED FOR BETTER BEHAVIOUR.
   /*var ceiling = character.sprite.height / 2;
@@ -41,16 +45,21 @@ function updtChar() {
 }
 
 function keyPressed() {
-  if (keyCode == 87) {
-    character.yspd = -10;
+  if (keyCode == 87 && character.jumpCount < 2) {
+    character.yspd = -15;
+    character.jumpCount++;
   }
 }
 
 function movePlayer() { //Get keycodes from keycode.info website
-  if (keyIsDown(65)) { //Move Left
+  if (keyIsDown(65)) {  //Move Left
     character.xspd = -5;
-  } else if (keyIsDown(68)) { //Move Right
+  }
+  if (keyIsDown(68)) { //Move Right
     character.xspd = 5;
+  }
+  if (keyIsDown(65) && keyIsDown(68)) {
+    character.xspd = 0;
   }
 }
 
@@ -58,14 +67,15 @@ var backgroundWidth;
 
 function draw() {
   background(51);
-  //centerCanvas();
-
   background1.resize(windowWidth, windowHeight);
-  //image(background1, 0, 0); //loads background image
   scroll();
   character.update();
   character.draw();
   obstTest.draw();
+  monsterTest.update();
+  monsterTest.draw();
+  firstNote.draw();
+  noteTest.draw();
 }
 
 function scroll() {

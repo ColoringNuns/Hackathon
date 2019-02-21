@@ -33,6 +33,8 @@ class Entity {
 
     this.hp = hp; //The health of the entity
 
+    this.jumpCount = 0;
+
     this.attCounter = 0; //The number of frames till the attack ends
   }
 

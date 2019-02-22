@@ -2,7 +2,7 @@ function preload() {
   background1 = loadImage('assets/pixelartcity.png');
   character = new Entity(25,0,[],['rectangle',0,0,50,50],updtChar,100);
   obstTest = new Obstacle(200,200,['rectangle',0,0,200,50]);
-  monsterTest = new BasicMonster(25,0,character);
+  monsterTest = new BasicMonster(300,0,character);
 }
 
 function setup() {
@@ -11,6 +11,7 @@ function setup() {
   backgroundWidth = windowWidth;
   firstNote = new TextBox(windowWidth/4,windowHeight/10, windowWidth/2, windowHeight/5, "The world is crumbling. Order has fallen. We are on our own.");
   noteTest = new Note(300,400,[],['rectangle',0,0,50,50],character,firstNote);
+  noSmooth();
 }
 
 function updtChar() {
@@ -21,6 +22,14 @@ function updtChar() {
 
   character.yspd += 1; //GRAVITY
   character.xspd *= 0.95; //FRICTION
+
+  character.sprite.collide(obstTest.obst, ()=> {
+    if (character.sprite.touching.bottom) {
+      character.yspd = 0;
+      character.xspd = 0;
+      character.jumpCount = 0;
+    }
+  });
 
   //Ground Collision
   var ground = height - (character.sprite.height / 2);

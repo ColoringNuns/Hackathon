@@ -60,7 +60,7 @@ function updtChar() {
   character.yspd += 1;
 
   enemies.update();
-
+  
   obstacles.update();
   /*character.sprite.overlap(firstNotePaper.obst, () => {
     notesSeen.first = true;
@@ -82,7 +82,7 @@ function updtChar() {
       character.sprite.changeAnimation('animation2');
       character.attCounter--;
     }
-
+    
     if (character.attDelay > 0) {
       character.attDelay--;
     }
@@ -258,7 +258,6 @@ function generate() {
 function genPlatforms() {
   numPlatforms = Math.round(Math.random() + 1);
   let randY = (Math.random() * windowHeight * 4.75/6) + (windowHeight / 5.5);
-  console.log(randY)
   let randX = (Math.random() * windowWidth) + lastX;
   let len = (Math.floor(Math.random() * 3) + 1) * 160;
   obstacles.addObst((new Obstacle(randX,randY,['rectangle',0,0,len,56], ['assets/platforms/'+len+'.png',len,56,1])).obst);

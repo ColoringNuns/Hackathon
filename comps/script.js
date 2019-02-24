@@ -15,7 +15,7 @@ function preload() {
   character.sprite.animation.frameDelay = 5;
   enemies = new enemyGroup(character);
   obstacles = new obstGroup(character, enemies);
-  fnt = loadFont('assets/start.ttf');
+  //fnt = loadFont('assets/start.ttf');
   dead = false;
   amountLives = 2;
   lastCheckpoint = 75;
@@ -30,10 +30,10 @@ function setupNotes() {
 
 function setup() {
   upbeat.play();
-  upbeat.loop();
+  upbeat.setLoop(true);
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
-  textFont(fnt);
+  //textFont(fnt);
   backgroundWidth = width;
   lastX = 0;
   ground = new Obstacle(0,height+1,['rectangle',0,0,1000000,1]);
@@ -68,7 +68,7 @@ function updtChar() {
   }); */
 
   if (!dead) {
-    if (character.attCounter == 20) {
+    if (character.attCounter == 10) {
       swoosh.play();
       character.sprite.changeAnimation('animation2');
       character.sprite.animation.looping = false;
@@ -94,6 +94,7 @@ function updtChar() {
       dead = true;
       amountLives--;
       if (amountLives == 0) {
+        upbeat.setLoop(false);
         upbeat.pause();
         upbeat.stop();
         mellow.play();
@@ -128,15 +129,15 @@ function keyPressed() {
     character.jumpCount++;
   }
   if ((keyCode == 74) && character.attDelay == 0) {
-    character.attCounter = 20;
-    character.attDelay = 40;
+    character.attCounter = 10;
+    character.attDelay = 20;
   }
 }
 
 function mouseClicked() {
  if (character.attDelay == 0) {
-    character.attCounter = 20;
-    character.attDelay = 40;
+    character.attCounter = 10;
+    character.attDelay = 20;
   }
 }
 
@@ -180,11 +181,17 @@ function draw() {
     text("Kills: " + killCount,wordsPosX,50);
     text("Lives: " + amountLives,wordsPosX,100);
   } else {
+    upbeat.setLoop(true);
+    upbeat.pause();
+    upbeat.stop();
     showText();
   }
 }
 
 function showText() {
+  upbeat.setLoop(true);
+  upbeat.pause();
+  upbeat.stop();
   textAlign(CENTER, CENTER);
   textSize(30);
   fill(255);
@@ -250,7 +257,8 @@ function generate() {
 
 function genPlatforms() {
   numPlatforms = Math.round(Math.random() + 1);
-  let randY = (Math.random() * windowHeight * 2.25/3) + (windowHeight / 6);
+  let randY = (Math.random() * windowHeight * 4.75/6) + (windowHeight / 5.5);
+  console.log(randY)
   let randX = (Math.random() * windowWidth) + lastX;
   let len = (Math.floor(Math.random() * 3) + 1) * 160;
   obstacles.addObst((new Obstacle(randX,randY,['rectangle',0,0,len,56], ['assets/platforms/'+len+'.png',len,56,1])).obst);

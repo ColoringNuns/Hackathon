@@ -1,7 +1,7 @@
 class Enemy {
   constructor (x,endX,y,dmg,character, maxSpeed, hp) {
     this.ent = new Entity(x, y,[['assets/skeleton/attack.png',130,111,18], ['assets/skeleton/walk.png',74,111,13],
-    ['assets/skeleton/dead.png',115,111,15],['assets/skeleton/hit.png',104,111,8]],['rectangle',0,5,74,100],()=>{},hp)
+    ['assets/skeleton/dead.png',115,111,15],['assets/skeleton/hit.png',104,111,8]],['rectangle',0,5,100,100],()=>{},hp)
     this.dmg = dmg;
     this.alreadyHit = false;
     this.gotHit = false;
@@ -19,9 +19,9 @@ class Enemy {
   
   update() {
     if (this.ent.hp > 0) {
-      if (this.ent.sprite.position.x < (this.startX - this.endX) + 37) {
+      if (this.ent.sprite.position.x < (this.startX - this.endX) + 50) {
         this.ent.xspd = 5;
-      } else if (this.ent.sprite.position.x > (this.startX + this.endX) - 37) {
+      } else if (this.ent.sprite.position.x > (this.startX + this.endX) - 50) {
         this.ent.xspd = -5;
       } else {
         if (this.ent.sprite.position.x < this.char.sprite.position.x) {

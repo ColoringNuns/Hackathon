@@ -15,7 +15,7 @@ function preload() {
   character.sprite.animation.frameDelay = 5;
   enemies = new enemyGroup(character);
   obstacles = new obstGroup(character, enemies);
-  fnt = loadFont('assets/start.ttf');
+  fnt = loadFont('assets/Prstart.ttf');
   dead = false;
   amountLives = 2;
   lastCheckpoint = 75;
@@ -60,7 +60,7 @@ function updtChar() {
   character.yspd += 1;
 
   enemies.update();
-  
+
   obstacles.update();
   /*character.sprite.overlap(firstNotePaper.obst, () => {
     notesSeen.first = true;
@@ -82,7 +82,7 @@ function updtChar() {
       character.sprite.changeAnimation('animation2');
       character.attCounter--;
     }
-    
+
     if (character.attDelay > 0) {
       character.attDelay--;
     }

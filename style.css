@@ -2,7 +2,7 @@
   font-family: 'start';
   font-style: normal;
   font-weight: normal;
-  src: local('start'), url('assets/start.ttf') format('truetype');
+  src: local('start'), url('assets/Prstart.ttf') format('truetype');
 }
 
 head, body {

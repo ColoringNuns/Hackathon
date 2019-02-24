@@ -15,7 +15,7 @@ function preload() {
   character.sprite.animation.frameDelay = 5;
   enemies = new enemyGroup(character);
   obstacles = new obstGroup(character, enemies);
-  //fnt = loadFont('assets/start.ttf');
+  fnt = loadFont('assets/start.ttf');
   dead = false;
   amountLives = 2;
   lastCheckpoint = 75;
@@ -33,7 +33,7 @@ function setup() {
   upbeat.setLoop(true);
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
-  //textFont(fnt);
+  textFont(fnt);
   backgroundWidth = width;
   lastX = 0;
   ground = new Obstacle(0,height+1,['rectangle',0,0,1000000,1]);
@@ -60,7 +60,7 @@ function updtChar() {
   character.yspd += 1;
 
   enemies.update();
-  
+
   obstacles.update();
   /*character.sprite.overlap(firstNotePaper.obst, () => {
     notesSeen.first = true;
@@ -82,7 +82,7 @@ function updtChar() {
       character.sprite.changeAnimation('animation2');
       character.attCounter--;
     }
-    
+
     if (character.attDelay > 0) {
       character.attDelay--;
     }

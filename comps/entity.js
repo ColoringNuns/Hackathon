@@ -3,11 +3,7 @@
 
   The sprite is a p5play sprite object
   The collider should generally be a rectangle
-
-  The update variable is actually a function
-  It should handle the logic of movement, collision, attack, etc.
-  For monsters this should probably be handled by MARTIN (he's doing AI)
-
+  
   The hit function can be used to hit the sprite, or determine whether it is alive by calling hit(). It returns whether the entity is alive
 */
 
@@ -22,7 +18,7 @@ class Entity {
     //Set the main sprite's collider
     //generally: collider = ['rectangle',0,0,width,height];
     this.sprite.setCollider(...collider);
-    this.sprite.debug = true; //Shows the collider
+    //this.sprite.debug = true; //Shows the collider
     //Set the update function (handles entity logic)
     //So you call "[entity_name].update()" and it handles logic
     this.update = update;
@@ -36,6 +32,7 @@ class Entity {
     this.jumpCount = 0;
 
     this.attCounter = 0; //The number of frames till the attack ends
+    this.attDelay = 0;
   }
 
   hit(dmg) {

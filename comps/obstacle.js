@@ -7,7 +7,7 @@ class Obstacle {
       loadAnimation(img);
       this.obst.addAnimation("Image", img);
     }
-    this.obst.debug = true;
+    //this.obst.debug = true;
   }
 
   draw() {

@@ -16,11 +16,11 @@ class TextBox {
     if (this.text.length < 60) 
       textSize(60);
     else if (this.text.length < 100)
-      textSize(36);  
+      textSize(36);
     else if (this.text.length < 190) 
       textSize(24);
     else
-      textSize(12);  
+      textSize(12);
   
     text(this.text, this.x, this.y, this.width, this.height);
   }

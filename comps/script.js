@@ -7,6 +7,10 @@ function preload() {
   axe = loadSound('assets/music/axe.mp3');
   thump = loadSound('assets/music/thump.mp3');
   background1 = loadImage('assets/pixelartcity.png');
+  fnt = loadFont('assets/Prstart.ttf');
+}
+
+function setup() {
   character = new Entity(75,0,[['assets/advent/run.png',150,111,6], ['assets/advent/jump.png',150,111,4],
   ['assets/advent/attack.png',150,111,4],
   ['assets/advent/somer.png',150,111,4],
@@ -15,20 +19,11 @@ function preload() {
   character.sprite.animation.frameDelay = 5;
   enemies = new enemyGroup(character);
   obstacles = new obstGroup(character, enemies);
-  fnt = loadFont('assets/Prstart.ttf');
   dead = false;
   amountLives = 2;
   lastCheckpoint = 75;
   killCount = 0;
   generate();
-}
-
-function setupNotes() {
-  firstNote = new TextBox(windowWidth/4,windowHeight/10, windowWidth/2, windowHeight/5, "The world is crumbling. Order has fallen. We are on our own.");
-  firstNotePaper = new Obstacle(700,height-25,['rectangle',0,0,50,50]);
-}
-
-function setup() {
   upbeat.play();
   upbeat.setLoop(true);
   createCanvas(windowWidth, windowHeight);
